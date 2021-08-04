@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Conestoga Grades</string>
+    <string name="navigationOpen">Open</string>
+    <string name="navigationClose">Close</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nameHint">Full Name</string>
+    <string name="gradeHint">Grade</string>
+    <string name="durationHint">Course Duration</string>
+    <string name="feesHint">Enter fees</string>
+    <string name="progLabel">Please select a program below</string>
+    <string name="saveButton">save</string>
+    <string name="searchByLabel">Search by</string>
+    <string name="idRadio">ID</string>
+    <string name="progRadio">Program code</string>
+    <string name="enterId">Enter ID</string>
+</resources>

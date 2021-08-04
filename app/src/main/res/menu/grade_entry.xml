@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/add_grade"
+            android:icon="@drawable/add_grade"
+            android:title="View Grades" />
+        <item
+            android:id="@+id/view_all"
+            android:icon="@drawable/view_grade"
+            android:title="Grade Entry" />
+        <item
+            android:id="@+id/search_grade"
+            android:icon="@drawable/search_grade"
+            android:title="Search" />
+    </group>
+</menu>
