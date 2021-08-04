@@ -3,12 +3,23 @@ package com.swagatsamal.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
+import com.swagatsamal.DbClasses.DbConfig;
+import com.swagatsamal.DbClasses.StudentPOJO;
+import com.swagatsamal.swagatsamalassignment2.AdapterToArrayAdapter;
+import com.swagatsamal.swagatsamalassignment2.MainActivity;
 import com.swagatsamal.swagatsamalassignment2.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +27,8 @@ import com.swagatsamal.swagatsamalassignment2.R;
  * create an instance of this fragment.
  */
 public class ViewGradesFragment extends Fragment {
+
+    RecyclerView recyclerView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,7 +73,24 @@ public class ViewGradesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_view_grade, container, false);
+        recyclerView = view.findViewById(R.id.gradeListView);
+
+        List<String> resultList = new ArrayList<>();
+        DbConfig dbConfig = new DbConfig(this.getContext());
+
+        resultList = dbConfig.viewAllStudents();
+        AdapterToArrayAdapter adapterToArrayAdapter = new AdapterToArrayAdapter(view.getContext(), resultList);
+
+        if (resultList != null) {
+            recyclerView.setAdapter(adapterToArrayAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        }
+        else
+        {
+            Toast.makeText(view.getContext(),"No records found",Toast.LENGTH_SHORT).show();
+        }
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_view_grades, container, false);
+        return view;
     }
 }

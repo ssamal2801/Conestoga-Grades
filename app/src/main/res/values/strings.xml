@@ -14,4 +14,7 @@
     <string name="idRadio">ID</string>
     <string name="progRadio">Program code</string>
     <string name="enterId">Enter ID</string>
+    <string name="viewGradesLabel">View Grades</string>
+    <string name="gradeEntryLabel">Grade Entry</string>
+    <string name="searchGradeLabel">Search</string>
 </resources>

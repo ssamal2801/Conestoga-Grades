@@ -7,14 +7,14 @@
         <item
             android:id="@+id/add_grade"
             android:icon="@drawable/add_grade"
-            android:title="View Grades" />
+            android:title="@string/gradeEntryLabel" />
         <item
             android:id="@+id/view_all"
             android:icon="@drawable/view_grade"
-            android:title="Grade Entry" />
+            android:title="@string/viewGradesLabel" />
         <item
             android:id="@+id/search_grade"
             android:icon="@drawable/search_grade"
-            android:title="Search" />
+            android:title="@string/searchGradeLabel" />
     </group>
 </menu>

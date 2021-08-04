@@ -4,11 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    tools:context="com.swagatsamal.fragments.GradeEntryFragment">
+    tools:context="com.swagatsamal.fragments.ViewGradesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/viewGradeList"
+        android:id="@+id/gradeListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center" />
+        android:layout_marginBottom="5dp"
+        android:clickable="true"
+        android:fadeScrollbars="false"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:hapticFeedbackEnabled="true"
+        android:scrollbarFadeDuration="600"
+        android:scrollbarSize="10dp"
+        android:scrollbarStyle="insideOverlay"
+        android:visibility="visible" />
 </RelativeLayout>

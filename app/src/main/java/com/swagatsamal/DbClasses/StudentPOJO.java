@@ -53,4 +53,15 @@ public class StudentPOJO {
     public void setFees(Double fees) {
         this.fees = fees;
     }
+
+    @Override
+    public String toString() {
+        return
+                "ID=" + ID +
+                " \n fullName='" + fullName +
+                " \n programCode='" + programCode +
+                " \n grade='" + grade +
+                " \n duration='" + duration +
+                " \n fees=" + fees ;
+    }
 }
