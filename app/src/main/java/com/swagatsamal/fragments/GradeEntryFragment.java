@@ -1,14 +1,28 @@
 package com.swagatsamal.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import com.swagatsamal.DbClasses.DbConfig;
+import com.swagatsamal.DbClasses.StudentPOJO;
+import com.swagatsamal.swagatsamalassignment2.MainActivity;
 import com.swagatsamal.swagatsamalassignment2.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +30,13 @@ import com.swagatsamal.swagatsamalassignment2.R;
  * create an instance of this fragment.
  */
 public class GradeEntryFragment extends Fragment {
+
+    EditText nameText;
+    EditText gradeText;
+    EditText courseDurationText;
+    EditText feesText;
+    ListView progListView;
+    Button saveButton;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,7 +81,74 @@ public class GradeEntryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_grades_entry, container, false);
+        nameText = view.findViewById(R.id.name);
+        gradeText = view.findViewById(R.id.grade);
+        courseDurationText = view.findViewById(R.id.duration);
+        feesText = view.findViewById(R.id.fees);
+        progListView = view.findViewById(R.id.progListView);
+        saveButton = view.findViewById(R.id.saveButton);
+        StudentPOJO studentPOJO = new StudentPOJO();
+
+        //The list of programs offered
+        ArrayList<String> programs = new ArrayList<>();
+        programs.add("PROG01");
+        programs.add("PROG02");
+        programs.add("PROG03");
+        programs.add("PROG04");
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, programs);
+        progListView.setAdapter(arrayAdapter);
+
+        try {
+        progListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                studentPOJO.setProgramCode(String.valueOf(programs.get(i)));
+                Toast.makeText(getContext(),studentPOJO.getProgramCode().toString()+" selected",Toast.LENGTH_SHORT).show();
+                View selected = progListView.getChildAt(i);
+                Log.i("INDEX SELECTED: ",""+i);
+                selected.setBackgroundColor(Color.LTGRAY);
+                for(int j=0 ; j<programs.size() ; j++)
+                {
+                    if(j != i && progListView.getChildAt(j) != null)
+                    {
+                        progListView.getChildAt(j).setBackgroundColor(Color.WHITE);
+                    }
+                }
+            }
+        });
+        } catch (Exception e){
+            Log.i("ERROR ",e.getMessage());
+        }
+
+
+        //method fired on click of SUBMIT button
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Setting the data to studentPOJO object
+
+                if(feesText.getText() != null) {
+                    studentPOJO.setFullName(String.valueOf(nameText.getText()));
+                    studentPOJO.setGrade(String.valueOf(gradeText.getText()));
+                    studentPOJO.setFees(Double.parseDouble(String.valueOf(feesText.getText())));
+                    studentPOJO.setDuration(String.valueOf(courseDurationText.getText()));
+                }
+
+                //"insertStudent" method call to save the studentPOJO object to database
+                DbConfig dbConfig = new DbConfig(view.getContext());
+                if (studentPOJO != null) {
+                    dbConfig.insertStudent(studentPOJO);
+                    Toast.makeText(view.getContext(), "Student details saved", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_grades_entry, container, false);
+        return view;
     }
+
+
+
 }

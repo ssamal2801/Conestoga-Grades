@@ -1,21 +1,20 @@
 package com.swagatsamal.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.swagatsamal.DbClasses.DbConfig;
-import com.swagatsamal.DbClasses.StudentPOJO;
-import com.swagatsamal.swagatsamalassignment2.AdapterToArrayAdapter;
-import com.swagatsamal.swagatsamalassignment2.MainActivity;
+import com.swagatsamal.swagatsamalassignment2.AdapterConversion;
 import com.swagatsamal.swagatsamalassignment2.R;
 
 import java.util.ArrayList;
@@ -74,16 +73,21 @@ public class ViewGradesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_view_grade, container, false);
-        recyclerView = view.findViewById(R.id.gradeListView);
+        recyclerView = view.findViewById(R.id.progListView);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
+                DividerItemDecoration.VERTICAL));
 
         List<String> resultList = new ArrayList<>();
         DbConfig dbConfig = new DbConfig(this.getContext());
 
         resultList = dbConfig.viewAllStudents();
-        AdapterToArrayAdapter adapterToArrayAdapter = new AdapterToArrayAdapter(view.getContext(), resultList);
+        if(resultList.size() == 0) {
+            resultList.add("\t No student records. \n \tPlease add a record to begin.");
+        }
+        AdapterConversion adapterConversion = new AdapterConversion(view.getContext(), resultList);
 
         if (resultList != null) {
-            recyclerView.setAdapter(adapterToArrayAdapter);
+            recyclerView.setAdapter(adapterConversion);
             recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         }
         else

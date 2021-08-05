@@ -18,7 +18,8 @@
             android:layout_gravity="center"
             android:ems="10"
             android:hint="@string/nameHint"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/grade"
@@ -31,7 +32,7 @@
             android:minHeight="48dp" />
 
         <EditText
-            android:id="@+id/progCode"
+            android:id="@+id/duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -61,11 +62,10 @@
             android:text="@string/progLabel" />
 
         <ListView
-            android:id="@+id/progList"
+            android:id="@+id/progListView"
             android:layout_width="match_parent"
-            android:layout_height="390dp">
+            android:layout_height="200dp" />
 
-        </ListView>
 
         <Button
             android:id="@+id/saveButton"

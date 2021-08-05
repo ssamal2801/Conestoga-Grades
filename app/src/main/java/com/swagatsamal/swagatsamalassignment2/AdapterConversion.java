@@ -9,16 +9,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.swagatsamal.DbClasses.StudentPOJO;
-
 import java.util.List;
 
-public class AdapterToArrayAdapter extends RecyclerView.Adapter<AdapterToArrayAdapter.ViewHolder> {
+public class AdapterConversion extends RecyclerView.Adapter<AdapterConversion.ViewHolder> {
 
     Context context;
     List<String> students;
 
-    public AdapterToArrayAdapter(Context context, List<String> students)
+    public AdapterConversion(Context context, List<String> students)
     {
         this.context = context;
         this.students = students;

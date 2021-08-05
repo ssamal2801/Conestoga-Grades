@@ -57,11 +57,11 @@ public class StudentPOJO {
     @Override
     public String toString() {
         return
-                "ID=" + ID +
-                " \n fullName='" + fullName +
-                " \n programCode='" + programCode +
-                " \n grade='" + grade +
-                " \n duration='" + duration +
-                " \n fees=" + fees ;
+                "StudentID: " + ID +
+                " \n Full Name: " + fullName +
+                " \n Program Code: " + programCode +
+                " \n Grade: " + grade +
+                " \n Duration: " + duration +
+                " \n Fees: " + fees ;
     }
 }

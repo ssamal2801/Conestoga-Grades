@@ -56,9 +56,9 @@ public class DbConfig extends SQLiteOpenHelper {
     }
 
     //View all student record
-    public List<String> viewAllStudents()
+    public ArrayList<String> viewAllStudents()
     {
-        List<String> allStudents = new ArrayList<>();
+        ArrayList<String> allStudents = new ArrayList<>();
         StudentPOJO studentPOJO = new StudentPOJO();
         try {
             SQLiteDatabase conestogaDb = this.getReadableDatabase();

@@ -47,20 +47,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.frame, new ViewGradesFragment()).commit();
         }
         //Inserting a default student for app test
-        try {
-            studentPOJO = new StudentPOJO();
-            dbConfig = new DbConfig(MainActivity.this);
-
-            studentPOJO.setFullName("Swagat Samal");
-            studentPOJO.setProgramCode("PROG3698");
-            studentPOJO.setGrade("A+");
-            studentPOJO.setDuration("4 Months");
-            studentPOJO.setFees(1545.63);
-
-            dbConfig.insertStudent(studentPOJO);
-        } catch (Exception exception) {
-            Toast.makeText(MainActivity.this, "Failed to add. Please check the input.", Toast.LENGTH_SHORT).show();
-        }
+//        try {
+//            studentPOJO = new StudentPOJO();
+//            dbConfig = new DbConfig(MainActivity.this);
+//
+//            studentPOJO.setFullName("Swagat Samal");
+//            studentPOJO.setProgramCode("PROG3698");
+//            studentPOJO.setGrade("A+");
+//            studentPOJO.setDuration("4 Months");
+//            studentPOJO.setFees(1545.63);
+//
+//            dbConfig.insertStudent(studentPOJO);
+//        } catch (Exception exception) {
+//            Toast.makeText(MainActivity.this, "Failed to add. Please check the input.", Toast.LENGTH_SHORT).show();
+//        }
 
     }
 

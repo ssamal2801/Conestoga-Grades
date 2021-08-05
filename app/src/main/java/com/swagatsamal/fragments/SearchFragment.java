@@ -8,7 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.swagatsamal.DbClasses.DbConfig;
 import com.swagatsamal.swagatsamalassignment2.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,7 +64,13 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_view_grade, container, false);
+
+        List<String> resultList = new ArrayList<>();
+        DbConfig dbConfig = new DbConfig(this.getContext());
+
+        resultList = dbConfig.viewAllStudents();
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        return view;
     }
 }
