@@ -32,7 +32,7 @@ public class AdapterConversion extends RecyclerView.Adapter<AdapterConversion.Vi
         return new ViewHolder(view);
     }
 
-    //bind the position returned by ViewHolder class
+    //bind the record to the view
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.textView.setText(students.get(position));
