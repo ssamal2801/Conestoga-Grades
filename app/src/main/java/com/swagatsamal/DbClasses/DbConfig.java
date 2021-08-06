@@ -42,12 +42,14 @@ public class DbConfig extends SQLiteOpenHelper {
             SQLiteDatabase conestogaDb = this.getWritableDatabase();
             ContentValues contentValues =  new ContentValues();
 
+            //saving a record in Db
             contentValues.put("fullName", student.getFullName());
             contentValues.put("programCode", student.getProgramCode());
             contentValues.put("grade", student.getGrade());
             contentValues.put("duration", student.getDuration());
             contentValues.put("fees" ,student.getFees());
             conestogaDb.insert("students", null, contentValues);
+
             Log.i("MESSAGE: ","Student inserted");
         }catch (Exception e)
         {
@@ -58,7 +60,7 @@ public class DbConfig extends SQLiteOpenHelper {
     //View all student record
     public ArrayList<String> viewAllStudents()
     {
-        ArrayList<String> allStudents = new ArrayList<>();
+        ArrayList<String> allStudents = new ArrayList<>();//This list will save the record set that comes from DB
         StudentPOJO studentPOJO = new StudentPOJO();
         try {
             SQLiteDatabase conestogaDb = this.getReadableDatabase();
@@ -67,7 +69,7 @@ public class DbConfig extends SQLiteOpenHelper {
             //check if there is a result and parse it to a list
             if (cursor.moveToFirst())
             {
-                do {
+                do {//Assign cursor record to studentPOJO and send it to frontend as a list
                     studentPOJO.ID = cursor.getInt(0);
                     studentPOJO.fullName = cursor.getString(1);
                     studentPOJO.programCode = cursor.getString(2);
@@ -76,15 +78,68 @@ public class DbConfig extends SQLiteOpenHelper {
                     studentPOJO.fees = cursor.getDouble(5);
                     allStudents.add(studentPOJO.toString());
                 }
-                while (cursor.moveToNext());
+                while (cursor.moveToNext());//move next function to iterate through the result set
             }
 
         }catch (Exception e)
         {
             Log.i("ERROR: ",e.getMessage());
         }
-
-
         return allStudents;
+    }
+
+    //Get student data based on menu selection
+    public List<String> getStudentByMenu(StudentPOJO studentPOJO, String menuSelected) {
+        List<String> resultSet = new ArrayList<>();//List to store result set from DB
+
+        try{
+            if(menuSelected.equals("id") && studentPOJO.getID() != 0)
+            {
+                String[] arr = {String.valueOf(studentPOJO.getID())};
+                SQLiteDatabase conestogaDb = this.getReadableDatabase();
+                Cursor cursor = conestogaDb.rawQuery("SELECT * FROM students WHERE id=?",arr);
+
+                //check if there is a result and parse it to a list
+                if (cursor.moveToFirst())
+                {
+                    do {//Assign cursor record to studentPOJO and send it to frontend as a list
+                        studentPOJO.ID = cursor.getInt(0);
+                        studentPOJO.fullName = cursor.getString(1);
+                        studentPOJO.programCode = cursor.getString(2);
+                        studentPOJO.grade = cursor.getString(3);
+                        studentPOJO.duration = cursor.getString(4);
+                        studentPOJO.fees = cursor.getDouble(5);
+                        resultSet.add(studentPOJO.toString());
+                    }
+                    while (cursor.moveToNext());//move next function to iterate through the result set
+                }
+
+            }else if (menuSelected.equals("prog") && studentPOJO.getProgramCode() != null){
+                String[] arr = {studentPOJO.getProgramCode()};
+                SQLiteDatabase conestogaDb = this.getReadableDatabase();
+                Cursor cursor = conestogaDb.rawQuery("SELECT * FROM students where programCode=?",arr);
+
+                //check if there is a result and parse it to a list
+                if (cursor.moveToFirst())
+                {
+                    do {//Assign cursor record to studentPOJO and send it to frontend as a list
+                        studentPOJO.ID = cursor.getInt(0);
+                        studentPOJO.fullName = cursor.getString(1);
+                        studentPOJO.programCode = cursor.getString(2);
+                        studentPOJO.grade = cursor.getString(3);
+                        studentPOJO.duration = cursor.getString(4);
+                        studentPOJO.fees = cursor.getDouble(5);
+                        resultSet.add(studentPOJO.toString());
+                    }
+                    while (cursor.moveToNext());//move next function to iterate through the result set
+                }
+            }
+
+        }catch (Exception e)
+        {
+            Log.i("ERROR: ",e.getMessage());
+        }
+        
+        return resultSet;
     }
 }

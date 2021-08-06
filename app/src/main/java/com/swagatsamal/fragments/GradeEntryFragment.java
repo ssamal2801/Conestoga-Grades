@@ -38,6 +38,8 @@ public class GradeEntryFragment extends Fragment {
     ListView progListView;
     Button saveButton;
 
+    int indexSelected;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -105,6 +107,7 @@ public class GradeEntryFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 studentPOJO.setProgramCode(String.valueOf(programs.get(i)));
+                indexSelected = i;
                 Toast.makeText(getContext(),studentPOJO.getProgramCode().toString()+" selected",Toast.LENGTH_SHORT).show();
                 View selected = progListView.getChildAt(i);
                 Log.i("INDEX SELECTED: ",""+i);
@@ -141,6 +144,12 @@ public class GradeEntryFragment extends Fragment {
                 if (studentPOJO != null) {
                     dbConfig.insertStudent(studentPOJO);
                     Toast.makeText(view.getContext(), "Student details saved", Toast.LENGTH_SHORT).show();
+                    nameText.getText().clear();
+                    gradeText.getText().clear();
+                    feesText.getText().clear();
+                    courseDurationText.getText().clear();
+                    progListView.getChildAt(indexSelected).setBackgroundColor(Color.WHITE);
+
                 }
             }
         });

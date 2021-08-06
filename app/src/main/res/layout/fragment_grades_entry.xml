@@ -48,7 +48,7 @@
             android:layout_gravity="center"
             android:ems="10"
             android:hint="@string/feesHint"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:minHeight="48dp"
             tools:ignore="SpeakableTextPresentCheck" />
 

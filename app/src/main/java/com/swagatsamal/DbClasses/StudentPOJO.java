@@ -9,9 +9,13 @@ public class StudentPOJO {
     String duration;
     Double fees;
 
-    // ID can only be get and not set as it is auto generated.
+    // Reminder: ID should only be get and not set as it is auto generated.
     public int getID() {
         return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getFullName() {
