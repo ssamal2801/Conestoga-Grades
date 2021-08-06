@@ -149,7 +149,7 @@ public class SearchFragment extends Fragment {
             }
         });
 
-        // Inflate the layout for this fragment
+        // return the fragment to the parent
         return view;
     }
 
@@ -158,9 +158,11 @@ public class SearchFragment extends Fragment {
 
         // Check which radio button was clicked
 //-------------------------------SWITCH START----------------------------
-        switch(optionRadioGroup.getCheckedRadioButtonId()) {
+        switch(optionRadioGroup.getCheckedRadioButtonId()) {//switch to option selected
             case R.id.idRadio:
+                //alert user about the selection
                 Toast.makeText(getContext(),"Search by ID", Toast.LENGTH_SHORT).show();
+                //clear the fields and display only necessary fields to the user.
                 idEditText.getText().clear();
                 idEditText.setHint("Enter your ID here");
                 idEditText.setEnabled(true);
@@ -173,7 +175,9 @@ public class SearchFragment extends Fragment {
                 }
                     break;
             case R.id.progRadio:
+                //alert user about the selection
                 Toast.makeText(getContext(),"Search by program", Toast.LENGTH_SHORT).show();
+                //clear the fields and display only necessary fields to the user.
                 menuSelected = "prog";
                 idEditText.getText().clear();
                 idEditText.setHint("Select a program below:");
@@ -182,16 +186,17 @@ public class SearchFragment extends Fragment {
                 resultRecyclerView.setAdapter(null);
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, programs);
                 progListView.setAdapter(arrayAdapter);
-                try {
+                try {//check what program code was selected
                     progListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            //initiate studentPOJO object based on selection
                             studentPOJO.setProgramCode(String.valueOf(programs.get(i)));
                             Toast.makeText(getContext(),studentPOJO.getProgramCode().toString()+" selected",Toast.LENGTH_SHORT).show();
                             View selected = progListView.getChildAt(i);
                             Log.i("INDEX SELECTED: ",""+i);
-                            selected.setBackgroundColor(Color.LTGRAY);
-                            for(int j=0 ; j<programs.size() ; j++)
+                            selected.setBackgroundColor(Color.LTGRAY);//set Light Grey background for selected record
+                            for(int j=0 ; j<programs.size() ; j++)//set white background for rest of the options
                             {
                                 if(j != i && progListView.getChildAt(j) != null)
                                 {
@@ -201,6 +206,7 @@ public class SearchFragment extends Fragment {
                         }
                     });
                 } catch (Exception e){
+                    //log error message if any
                     Log.i("ERROR ",e.getMessage());
                 }
                 break;

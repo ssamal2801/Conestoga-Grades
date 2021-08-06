@@ -69,32 +69,40 @@ public class ViewGradesFragment extends Fragment {
         }
     }
 
+    //Method triggered every time this fragment loads
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //create a view object to inflate the contents on to it.
         View view = inflater.inflate(R.layout.fragment_view_grade, container, false);
+        //initiate the recycler view
         recyclerView = view.findViewById(R.id.progListView);
+        //set a vertical line below each row for better visibility
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL));
 
-        List<String> resultList = new ArrayList<>();
+        List<String> resultList = new ArrayList<>();//this list will store result set
         DbConfig dbConfig = new DbConfig(this.getContext());
 
         resultList = dbConfig.viewAllStudents();
+        //check if no record in database; alert user
         if(resultList.size() == 0) {
             resultList.add("\t No student records. \n \tPlease add a record to begin.");
         }
+        //initiating the custom adapter conversion object
         AdapterConversion adapterConversion = new AdapterConversion(view.getContext(), resultList);
 
+        //if result list has records, populate it on the recycler view
         if (resultList != null) {
             recyclerView.setAdapter(adapterConversion);
             recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         }
+        //if no records found in result list, alert user
         else
         {
             Toast.makeText(view.getContext(),"No records found",Toast.LENGTH_SHORT).show();
         }
-        // Inflate the layout for this fragment
+        // return the fragment to the parent
         return view;
     }
 }

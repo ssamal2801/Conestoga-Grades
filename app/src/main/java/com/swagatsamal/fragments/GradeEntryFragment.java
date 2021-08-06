@@ -80,16 +80,20 @@ public class GradeEntryFragment extends Fragment {
         }
     }
 
+    //Method called every time this view loads on screen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //create a view object to inflate the contents on to it.
         View view = inflater.inflate(R.layout.fragment_grades_entry, container, false);
+        //All view variables initiated
         nameText = view.findViewById(R.id.name);
         gradeText = view.findViewById(R.id.grade);
         courseDurationText = view.findViewById(R.id.duration);
         feesText = view.findViewById(R.id.fees);
         progListView = view.findViewById(R.id.progListView);
         saveButton = view.findViewById(R.id.saveButton);
+
         StudentPOJO studentPOJO = new StudentPOJO();
 
         //The list of programs offered
@@ -99,19 +103,25 @@ public class GradeEntryFragment extends Fragment {
         programs.add("PROG03");
         programs.add("PROG04");
 
+        //List of programs sent back to the view for user to be able to select
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, programs);
         progListView.setAdapter(arrayAdapter);
 
-        try {
+        try {//every time the user clicks on any record of the list view, this listener will be invoked
         progListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            //Operations to do once user click on a record
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //get the index of the cell clicked and assign the content to studentPOJO for DB operations
                 studentPOJO.setProgramCode(String.valueOf(programs.get(i)));
                 indexSelected = i;
+                //inform user about the selection
                 Toast.makeText(getContext(),studentPOJO.getProgramCode().toString()+" selected",Toast.LENGTH_SHORT).show();
+                //get the index of item selected and change background color to Light Gray
                 View selected = progListView.getChildAt(i);
                 Log.i("INDEX SELECTED: ",""+i);
-                selected.setBackgroundColor(Color.LTGRAY);
+                selected.setBackgroundColor(Color.LTGRAY);//set color to grey
+                //every time user selects a cell, iterate and change all other cell color to white.
                 for(int j=0 ; j<programs.size() ; j++)
                 {
                     if(j != i && progListView.getChildAt(j) != null)
@@ -122,6 +132,7 @@ public class GradeEntryFragment extends Fragment {
             }
         });
         } catch (Exception e){
+            //Log error message if any
             Log.i("ERROR ",e.getMessage());
         }
 
@@ -130,8 +141,8 @@ public class GradeEntryFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Setting the data to studentPOJO object
 
+                // Set the data to studentPOJO object
                 if(feesText.getText() != null) {
                     studentPOJO.setFullName(String.valueOf(nameText.getText()));
                     studentPOJO.setGrade(String.valueOf(gradeText.getText()));
@@ -143,7 +154,9 @@ public class GradeEntryFragment extends Fragment {
                 DbConfig dbConfig = new DbConfig(view.getContext());
                 if (studentPOJO != null) {
                     dbConfig.insertStudent(studentPOJO);
+                    //Alert user that record has been saved
                     Toast.makeText(view.getContext(), "Student details saved", Toast.LENGTH_SHORT).show();
+                    //clear all the fields for user to enter next record
                     nameText.getText().clear();
                     gradeText.getText().clear();
                     feesText.getText().clear();
@@ -154,7 +167,7 @@ public class GradeEntryFragment extends Fragment {
             }
         });
 
-        // Inflate the layout for this fragment
+        // Inflate this fragment to the parent
         return view;
     }
 

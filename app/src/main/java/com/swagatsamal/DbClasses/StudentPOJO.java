@@ -2,13 +2,14 @@ package com.swagatsamal.DbClasses;
 
 //Student POJO for easy access to DB;
 public class StudentPOJO {
+    //create variables same as student database.
     int ID;
     String fullName;
     String programCode;
     String grade;
     String duration;
     Double fees;
-
+//Create getter setters for all variables
     // Reminder: ID should only be get and not set as it is auto generated.
     public int getID() {
         return ID;
@@ -58,6 +59,7 @@ public class StudentPOJO {
         this.fees = fees;
     }
 
+    //toString method to convert all the variable to a string message.
     @Override
     public String toString() {
         return

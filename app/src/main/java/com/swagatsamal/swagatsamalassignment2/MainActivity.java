@@ -21,6 +21,7 @@ import com.swagatsamal.fragments.ViewGradesFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    //Object declaration
     StudentPOJO studentPOJO;
     DbConfig dbConfig;
     DrawerLayout drawerLayout;
@@ -44,23 +45,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //check state, refresh the frame only if the app starts for the first time.
         if(savedInstanceState == null) {
+            //set the default page of app to view all grades.
+            //default fragment is set to fragment_view_grade
             getSupportFragmentManager().beginTransaction().replace(R.id.frame, new ViewGradesFragment()).commit();
         }
-        //Inserting a default student for app test
-//        try {
-//            studentPOJO = new StudentPOJO();
-//            dbConfig = new DbConfig(MainActivity.this);
-//
-//            studentPOJO.setFullName("Swagat Samal");
-//            studentPOJO.setProgramCode("PROG3698");
-//            studentPOJO.setGrade("A+");
-//            studentPOJO.setDuration("4 Months");
-//            studentPOJO.setFees(1545.63);
-//
-//            dbConfig.insertStudent(studentPOJO);
-//        } catch (Exception exception) {
-//            Toast.makeText(MainActivity.this, "Failed to add. Please check the input.", Toast.LENGTH_SHORT).show();
-//        }
 
     }
 
@@ -81,8 +69,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    // On click functions below this
-
 
 }
