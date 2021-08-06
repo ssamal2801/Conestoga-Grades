@@ -6,14 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.swagatsamal.DbClasses.DbConfig;
+import com.swagatsamal.DbClasses.DbConfigHelper;
 import com.swagatsamal.DbClasses.StudentPOJO;
 import com.swagatsamal.fragments.GradeEntryFragment;
 import com.swagatsamal.fragments.SearchFragment;
@@ -23,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //Object declaration
     StudentPOJO studentPOJO;
-    DbConfig dbConfig;
+    DbConfigHelper dbConfigHelper;
     DrawerLayout drawerLayout;
 
     @Override

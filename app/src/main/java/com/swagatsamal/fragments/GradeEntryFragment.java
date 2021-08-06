@@ -16,13 +16,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.swagatsamal.DbClasses.DbConfig;
+import com.swagatsamal.DbClasses.DbConfigHelper;
 import com.swagatsamal.DbClasses.StudentPOJO;
-import com.swagatsamal.swagatsamalassignment2.MainActivity;
 import com.swagatsamal.swagatsamalassignment2.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -151,9 +149,9 @@ public class GradeEntryFragment extends Fragment {
                 }
 
                 //"insertStudent" method call to save the studentPOJO object to database
-                DbConfig dbConfig = new DbConfig(view.getContext());
+                DbConfigHelper dbConfigHelper = new DbConfigHelper(view.getContext());
                 if (studentPOJO != null) {
-                    dbConfig.insertStudent(studentPOJO);
+                    dbConfigHelper.insertStudent(studentPOJO);
                     //Alert user that record has been saved
                     Toast.makeText(view.getContext(), "Student details saved", Toast.LENGTH_SHORT).show();
                     //clear all the fields for user to enter next record

@@ -1,6 +1,5 @@
 package com.swagatsamal.fragments;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.swagatsamal.DbClasses.DbConfig;
+import com.swagatsamal.DbClasses.DbConfigHelper;
 import com.swagatsamal.swagatsamalassignment2.AdapterConversion;
 import com.swagatsamal.swagatsamalassignment2.R;
 
@@ -82,9 +81,9 @@ public class ViewGradesFragment extends Fragment {
                 DividerItemDecoration.VERTICAL));
 
         List<String> resultList = new ArrayList<>();//this list will store result set
-        DbConfig dbConfig = new DbConfig(this.getContext());
+        DbConfigHelper dbConfigHelper = new DbConfigHelper(this.getContext());
 
-        resultList = dbConfig.viewAllStudents();
+        resultList = dbConfigHelper.viewAllStudents();
         //check if no record in database; alert user
         if(resultList.size() == 0) {
             resultList.add("\t No student records. \n \tPlease add a record to begin.");

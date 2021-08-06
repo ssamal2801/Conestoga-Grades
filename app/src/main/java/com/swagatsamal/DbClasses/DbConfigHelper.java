@@ -16,9 +16,9 @@ import java.util.List;
 import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
 
 import com.swagatsamal.swagatsamalassignment2.MainActivity;
-
-public class DbConfig extends SQLiteOpenHelper {
-    public DbConfig(@Nullable Context context) {
+//DbConfigHelper is the Database Helper Class
+public class DbConfigHelper extends SQLiteOpenHelper {
+    public DbConfigHelper(@Nullable Context context) {
         //Open DB 'conestoga', Or create it, if does not exist.
         super(context, "conestoga.db", null, 1);
     }

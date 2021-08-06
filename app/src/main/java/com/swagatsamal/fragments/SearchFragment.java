@@ -21,7 +21,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.swagatsamal.DbClasses.DbConfig;
+import com.swagatsamal.DbClasses.DbConfigHelper;
 import com.swagatsamal.DbClasses.StudentPOJO;
 import com.swagatsamal.swagatsamalassignment2.AdapterConversion;
 import com.swagatsamal.swagatsamalassignment2.R;
@@ -48,7 +48,7 @@ public class SearchFragment extends Fragment {
     StudentPOJO studentPOJO;
 
     //DB config object declared
-    DbConfig dbConfig;
+    DbConfigHelper dbConfigHelper;
 
     //Arraylist to hold all offered programs
     ArrayList<String> programs = new ArrayList<>();//List is updated inside onCreate()
@@ -112,7 +112,7 @@ public class SearchFragment extends Fragment {
                 DividerItemDecoration.VERTICAL));
 
         //Database configured with default constructor
-        dbConfig = new DbConfig(this.getContext());
+        dbConfigHelper = new DbConfigHelper(this.getContext());
 
         //Radio button click triggers this method to get inout data
         idRadio.setOnClickListener(new View.OnClickListener() {
@@ -136,7 +136,7 @@ public class SearchFragment extends Fragment {
                 if(!idEditText.getText().toString().equals("")) {
                     studentPOJO.setID(Integer.parseInt(idEditText.getText().toString()));
                 }
-                    resultList = dbConfig.getStudentByMenu(studentPOJO, menuSelected);
+                    resultList = dbConfigHelper.getStudentByMenu(studentPOJO, menuSelected);
                     if (resultList.size() == 0) {
                         Toast.makeText(getContext(),"No records found",Toast.LENGTH_SHORT).show();
                         resultList.add("\t Student doesn't exist. \n \tHint: You can add this record.");
