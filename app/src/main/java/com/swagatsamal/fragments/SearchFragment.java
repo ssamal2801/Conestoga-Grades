@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -200,8 +201,11 @@ public class SearchFragment extends Fragment {
                             {
                                 if(j != i && progListView.getChildAt(j) != null)
                                 {
-                                    progListView.getChildAt(j).setBackgroundColor(Color.WHITE);
-                                }
+                                    //getting theme primary color and setting it to the unselected rows
+                                    //this alerts use about what option he/she has selected
+                                    TypedValue typedValue = new TypedValue();
+                                    getContext().getTheme().resolveAttribute(R.attr.colorOnPrimary, typedValue, true);
+                                    progListView.getChildAt(j).setBackgroundColor(typedValue.data);                                }
                             }
                         }
                     });
